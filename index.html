@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ビットコイン利益計算ツール</title>
+</head>
+<body>
+    <p><b><font size="7" face="游明朝">ビットコイン利益計算ツール</font></b></p>
+    <style>
+        .calc-bta {
+            background: #eaedff;
+            padding: 10px 30px;
+        }
+
+        form dl dt {
+            width: 200px;
+            height: 40px;
+            padding: 10px 0;
+            line-height: 40px;
+            float: left;
+        }
+
+        form dl dd {
+            padding: 10px 0;
+            margin: 0;
+        }
+
+        .box {
+            box-sizing: border-box;
+            width: 150px !important;
+            height: 40px !important;
+            margin: 0 !important;
+            padding: 0 10px !important;
+        }
+
+        .calc-btn {
+            width: 80px;
+            height: 30px;
+            border: 1px solid rgb(51, 51, 51);
+        }
+
+            .calc-btn:hover {
+                cursor: pointer;
+            }
+    </style>
+    <form class="calc-bta">
+        <dl>
+            <dt>⑴購入枚数：</dt>
+            <dd><input type="number" class="box" name="bfp"></dd>
+            <dt>&nbsp;&nbsp;購入金額：</dt>
+            <dd><input type="number" class="box" name="kin"></dd>
+            <dt>⑵購入枚数：</dt>
+            <dd><input type="number" class="box" name="bfp2"></dd>
+            <dt>&nbsp;&nbsp;購入金額：</dt>
+            <dd><input type="number" class="box" name="kin2"></dd>
+            <dt>&nbsp;&nbsp;売却枚数：</dt>
+            <dd><input type="number" class="box" name="kin3"></dd>
+            <dt>&nbsp;&nbsp;売却金額：</dt>
+            <dd><input type="number" class="box" name="kin4"></dd>
+            <p><input type="button" class="calc-btn" onclick="calc(bfp.value, bfp2.value, kin.value, kin2.value, kin3.value, kin4.value);" value="計算"></p>
+            <dt>&nbsp;&nbsp;所得金額：</dt>
+            <dd><input id="lean" class="box" type="text" readonly=""></dd>
+            <dt>&nbsp;&nbsp;1コインの取得価格：</dt>
+            <dd><input id="tanka" class="box" type="text" readonly=""></dd>
+        </dl>
+    </form>
+    <script>
+        function calc(bfp, bfp2, kin, kin2, kin3, kin4) {
+            var num1 = parseInt(bfp);
+            var num2 = parseInt(bfp2);
+            var num3 = parseInt(kin);
+            var num4 = parseInt(kin2);
+            var num5 = parseInt(kin3);
+            var num6 = parseInt(kin4);
+            if (num3 === 0){
+                const tanka_value = document.getElementById('tanka').value = Math.round(num3/num1);
+                const lean_value = document.getElementById('lean').value = Math.round(num3-num4);
+            }else{
+                const tanka_value = document.getElementById('tanka').value = Math.ceil((num3+num4)/(num1+num2));
+                const lean_value = document.getElementById('lean').value = Math.round(num6-(Math.ceil((num3+num4)/(num1+num2))*num5));
+            }
+        }
+    </script>
+</body>
+</html>
